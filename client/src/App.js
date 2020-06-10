@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import Input from './components/Input'
+import service from './services/services'
+import Tasks from './components/Tasks'
 
-function App() {
+const App = () => {
+  const [tasks, setTasks] = useState([])
+  const [inputValue, setInputValue] = useState('')
+
+  const handleFormSubmit = e => {
+    e.preventDefault()
+    setTasks(tasks.concat(inputValue))
+    setInputValue('')
+  }
+
+  const handleInputChange = e => {
+    setInputValue(e.target.value)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Input submit={handleFormSubmit} inputValue={inputValue} inputChange={handleInputChange}/>
+      <Tasks taskList={tasks} />
     </div>
-  );
+  )
 }
 
 export default App;
