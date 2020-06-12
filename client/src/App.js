@@ -8,7 +8,7 @@ const App = () => {
   const [inputValue, setInputValue] = useState('')
 
   useEffect(async () => {
-    setNotes(taskService.getAll())
+    setTasks(taskService.getAll())
   }, [])
 
   const handleFormSubmit = e => {
