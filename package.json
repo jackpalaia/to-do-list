@@ -4,6 +4,7 @@
   "description": "to-do list app",
   "main": "index.js",
   "scripts": {
+    "buildui": "rm -rf build && cd client && npm run build && cp -r build .. && git add . && sleep 5 &&git commit -m buildui",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "lint": "eslint ."
