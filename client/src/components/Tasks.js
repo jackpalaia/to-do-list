@@ -1,12 +1,13 @@
 import React from 'react'
-import Task from '../components/Task'
+import Task from './Task'
 
-const Tasks = ({ taskList }) => (
-  <div>
-    <ul>
-      {taskList.map((task, i) => <Task key={i} task={task} />)}
-    </ul>
-  </div>
-)
+const Tasks = ({ taskList }) => {
+  return (
+    <div>
+      <ul>
+      </ul>
+    </div>
+  )
+}
 
 export default Tasks
