@@ -7,9 +7,8 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  dateCreated: Date,
-  dueDate: Date,
-  pinned: Boolean
+  pinned: Boolean,
+  dateCreated: Date
 })
 
 taskSchema.set('toJSON', {

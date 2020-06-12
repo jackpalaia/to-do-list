@@ -32,9 +32,8 @@ tasksRouter.post('/', async (req, res) => {
   const body = req.body
   const task = new Task({
     content: body.content,
+    pinned: body.pinned || false,
     dateCreated: new Date(),
-    dueDate: body.dueDate,
-    pinned: body.pinned || false
   })
   try {
     const savedTask = await task.save()
