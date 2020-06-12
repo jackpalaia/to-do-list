@@ -19,6 +19,11 @@ try {
 app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
-app.use(express.midd)
+app.use(middleware.requestLogger)
 
 app.use('/api/tasks', tasksRouter)
+
+app.use(middleware.unknownEndpoint)
+app.use(middleware.errorHandler)
+
+module.exports = app
