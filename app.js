@@ -10,8 +10,10 @@ const cors = require('cors')
 logger.info(`connecting to ${config.MONGODB_URI}`)
 
 try {
-  await mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  logger.info('connected to MongoDB')
+  (async () => {
+    await mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    logger.info('connected to MongoDB')
+  })()
 } catch (error) {
   logger.error(`error connecting to mongoDB: ${error}`)
 }
