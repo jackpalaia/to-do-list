@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.set('useFindAndModify', true)
+mongoose.set('useFindAndModify', false)
 
 const taskSchema = new mongoose.Schema({
   content: {
