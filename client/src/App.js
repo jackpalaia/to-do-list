@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Input from './components/Input'
-import taskService from './services/services'
+import taskService from './services/service'
 import Tasks from './components/Tasks'
 
 const App = () => {
@@ -8,9 +8,7 @@ const App = () => {
   const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
-    (async () => {
-      setTasks(await taskService.getAll())
-    })()
+    (async () => setTasks(await taskService.getAll()))()
   }, [])
 
   const handleFormSubmit = e => {
