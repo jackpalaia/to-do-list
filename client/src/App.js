@@ -7,7 +7,7 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState('')
 
-  useEffect(() => {(async () => setTasks(await taskService.getAll()))()})
+  useEffect(() => {(async () => setTasks(await taskService.getAll()))()}, [])
 
   const handleFormSubmit = async e => {
     e.preventDefault()
@@ -24,10 +24,16 @@ const App = () => {
     setInputValue(e.target.value)
   }
 
+  const handleDelete = id => {
+    const task = tasks.find(t => t.id === id)
+    taskService.remove(id)
+      .then(() => setTasks(tasks.filter(t => t !== task)))
+  }
+
   return (
     <div>
       <Input submit={handleFormSubmit} inputValue={inputValue} inputChange={handleInputChange}/>
-      <Tasks taskList={tasks} />
+      <Tasks taskList={tasks} deleteTask={handleDelete}/>
     </div>
   )
 }
