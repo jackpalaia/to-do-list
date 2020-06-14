@@ -1,21 +1,9 @@
 const axios = require('axios')
 const baseUrl = '/api/tasks'
 
-const getAll = async () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
-}
-const create = async task => {
-  const request = axios.post(baseUrl, task)
-  return request.then(response => response.data)
-}
-const remove = async id => {
-  const request = axios.delete(`${baseUrl}/${id}`)
-  return request.then(response => response.data)
-}
-const update = async (id, task) => {
-  const request = axios.put(`${baseUrl}/${id}`, task)
-  return request.then(response => response.data)
-}
+const getAll = async () => (await axios.get(baseUrl)).data
+const create = async task => (await axios.post(baseUrl, task)).data
+const remove = async id => (await axios.delete(`${baseUrl}/${id}`)).data
+const update = async (id, task) => (await axios.put(`${baseUrl}/${id}`, task)).data
 
 export default { getAll, create, remove, update }
