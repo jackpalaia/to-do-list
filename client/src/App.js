@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react'
 import Input from './components/Input'
 import taskService from './services/service'
 import Tasks from './components/Tasks'
-import { set } from 'mongoose'
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState('')
 
-  useEffect(() => {
-    (async () => setTasks(await taskService.getAll()))()
-  }, [])
+  useEffect(() => (async () => setTasks(await taskService.getAll()))(), [])
 
-  const handleFormSubmit = e => {
+  const handleFormSubmit = async e => {
     e.preventDefault()
-    setTasks(tasks.concat(inputValue))
+    const newTask = {
+      content: inputValue,
+      pinned: false,
+      dateCreated: new Date()
+    }
+    setTasks(tasks.concat(await taskService.create(newTask)))
     setInputValue('')
   }
 
