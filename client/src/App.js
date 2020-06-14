@@ -2,18 +2,15 @@ import React, { useState, useEffect } from 'react'
 import Input from './components/Input'
 import taskService from './services/service'
 import Tasks from './components/Tasks'
+import { set } from 'mongoose'
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState('')
 
-  console.log(typeof tasks)
-
   useEffect(() => {
     (async () => setTasks(await taskService.getAll()))()
   }, [])
-
-  console.log(typeof tasks)
 
   const handleFormSubmit = e => {
     e.preventDefault()
@@ -33,4 +30,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App
