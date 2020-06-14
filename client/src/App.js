@@ -7,9 +7,13 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState('')
 
+  console.log(typeof tasks)
+
   useEffect(() => {
     (async () => setTasks(await taskService.getAll()))()
   }, [])
+
+  console.log(typeof tasks)
 
   const handleFormSubmit = e => {
     e.preventDefault()
