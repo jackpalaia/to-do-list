@@ -7,8 +7,14 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  pinned: Boolean,
-  dateCreated: Date
+  pinned: {
+    type: Boolean,
+    default: false
+  },
+  dateCreated: {
+    type: Date,
+    default: new Date()
+  }
 })
 
 taskSchema.set('toJSON', {
