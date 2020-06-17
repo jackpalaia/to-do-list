@@ -7,55 +7,29 @@ tasksRouter.get('/', async (req, res) => {
 })
 
 tasksRouter.get('/:id', async (req, res) => {
-  try {
-    const task = await Task.findById(req.params.id)
-    if (task) {
-      res.send(task.toJSON())
-    } else {
-      res.status(404).end()
-    }
-  } catch (error) {
-    next(error)
+  const task = await Task.findById(req.params.id)
+  if (task) {
+    res.send(task.toJSON())
+  } else {
+    res.status(404).end()
   }
 })
 
 tasksRouter.delete('/:id', async (req, res) => {
-  try {
-    await Task.findByIdAndRemove(req.params.id)
-    res.status(204).end()
-  } catch (error) {
-    next(error)
-  }
+  await Task.findByIdAndRemove(req.params.id)
+  res.status(204).end()
 })
 
 tasksRouter.post('/', async (req, res) => {
-  const body = req.body
-  const task = new Task({
-    content: body.content,
-    pinned: body.pinned || false,
-    dateCreated: new Date(),
-  })
-  try {
-    const savedTask = await task.save()
-    res.send(savedTask.toJSON())
-  } catch (error) {
-    next(error)
-  }
+  const task = new Task(req.body)
+  const savedTask = await task.save()
+  res.send(savedTask.toJSON())
 })
 
 tasksRouter.put('/:id', async (req, res) => {
-  const body = req.body
-  const task = {
-    content: body.content,
-    dueDate: body.dueDate,
-    pinned: body.pinned,
-  }
-  try {
-    const updatedTask = await Task.findByIdAndUpdate(req.params.id, task, { new: true })
-    res.send(updatedTask.toJSON())
-  } catch (error) {
-    next(error)
-  }
+  const task = req.body
+  const updatedTask = await Task.findByIdAndUpdate(req.params.id, task, { new: true })
+  res.send(updatedTask.toJSON())
 })
 
 module.exports = tasksRouter
